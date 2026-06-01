@@ -5,13 +5,13 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #e0e0e0;
     padding: 20px;
     transition: 0.3s;
 }
 
-/* Modo oscuro */
+/* ========== MODO OSCURO ========== */
 body.oscuro {
     background: #1a1a2e;
     color: white;
@@ -35,6 +35,24 @@ body.oscuro .tarea {
     background: #0f3460;
 }
 
+body.oscuro .prioridad-btn {
+    background: #1a1a2e;
+    color: white;
+}
+
+body.oscuro .prioridad-btn:hover {
+    background: #16213e;
+}
+
+body.oscuro .prioridad-btn.activo {
+    background: #667eea;
+}
+
+body.oscuro .estado-btn {
+    background: #0f3460;
+    color: white;
+}
+
 /* ========== CONTENEDOR PRINCIPAL ========== */
 .contenedor-principal {
     display: flex;
@@ -47,7 +65,7 @@ body.oscuro .tarea {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* ========== SIDEBAR (CORREGIDO) ========== */
+/* ========== SIDEBAR ========== */
 .sidebar {
     width: 180px;
     background: #f5f5f5;
@@ -76,7 +94,7 @@ body.oscuro .tarea {
     font-size: 14px;
     font-weight: bold;
     background: white;
-    color: #333;  /* ← TEXTO VISIBLE EN MODO CLARO */
+    color: #333;
     transition: all 0.3s;
     text-align: left;
     padding-left: 15px;
@@ -88,25 +106,6 @@ body.oscuro .tarea {
 }
 
 .prioridad-btn.activo {
-    background: #667eea;
-    color: white;
-}
-
-/* Modo oscuro sidebar */
-body.oscuro .sidebar {
-    background: #0f3460;
-}
-
-body.oscuro .prioridad-btn {
-    background: #1a1a2e;
-    color: white;
-}
-
-body.oscuro .prioridad-btn:hover {
-    background: #16213e;
-}
-
-body.oscuro .prioridad-btn.activo {
     background: #667eea;
     color: white;
 }
@@ -138,6 +137,35 @@ h2 {
     border: none;
     border-radius: 20px;
     cursor: pointer;
+}
+
+/* ========== MEJORA 1: BIENVENIDA ========== */
+.bienvenida {
+    text-align: center;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #667eea20, #764ba220);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #667eea;
+    animation: fadeIn 0.5s ease;
+}
+
+body.oscuro .bienvenida {
+    background: linear-gradient(135deg, #667eea30, #764ba230);
+    color: #a8b5ff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ========== FORMULARIO ========== */
@@ -199,6 +227,33 @@ button:hover {
     margin-top: 10px;
 }
 
+/* ========== MEJORA 2: CONTADOR DE CARACTERES ========== */
+.campo-nombre {
+    width: 100%;
+}
+
+.contador {
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: #999;
+    margin-top: 5px;
+    transition: color 0.2s;
+}
+
+.contador.normal {
+    color: #999;
+}
+
+.contador.advertencia {
+    color: #f39c12;
+}
+
+.contador.peligro {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
 /* ========== FILTROS ESTADO ========== */
 .filtros-estado {
     display: flex;
@@ -228,11 +283,6 @@ button:hover {
     color: white;
 }
 
-body.oscuro .estado-btn {
-    background: #0f3460;
-    color: white;
-}
-
 .btn-accion {
     background: #27ae60;
     color: white;
@@ -241,6 +291,7 @@ body.oscuro .estado-btn {
     border-radius: 20px;
     cursor: pointer;
     font-size: 12px;
+    transition: all 0.3s;
 }
 
 .btn-accion.peligro {
@@ -249,6 +300,17 @@ body.oscuro .estado-btn {
 
 .btn-accion:hover {
     opacity: 0.8;
+    transform: scale(1.02);
+}
+
+/* ========== MEJORA 3: BOTÓN BORRAR TODO ========== */
+#btnBorrarTodo {
+    background: #e74c3c;
+    color: white;
+}
+
+#btnBorrarTodo:hover {
+    background: #c0392b;
 }
 
 /* ========== ESTADÍSTICAS ========== */
@@ -267,11 +329,7 @@ body.oscuro .estado-btn {
     font-size: 13px;
 }
 
-body.oscuro .estadisticas {
-    background: #1a1a2e;
-}
-
-/* ========== LISTA DE TAREAS ========== */
+/* ========== LISTA DE TAREAS CON SCROLL ========== */
 .lista-tareas {
     display: flex;
     flex-direction: column;
@@ -360,7 +418,7 @@ body.oscuro .lista-tareas::-webkit-scrollbar-track {
     word-break: break-word;
 }
 
-/* ========== BOTONES DE ACCIÓN ========== */
+/* ========== BOTONES DE ACCIÓN EN TARJETAS ========== */
 .acciones {
     display: flex;
     gap: 8px;
@@ -500,13 +558,8 @@ body.oscuro .modal-content {
     .nombre-tarea {
         font-size: 14px;
     }
-}
-
-/* ========== INDICADOR DE SCROLL ========== */
-.scroll-indicator {
-    text-align: center;
-    font-size: 11px;
-    color: #999;
-    margin-top: 8px;
-    padding: 5px;
+    
+    .filtros-estado {
+        justify-content: center;
+    }
 }

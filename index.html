@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Lista de Tareas</title>
+    <title>TaskMaster - Lista de Tareas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="contenedor-principal">
+        <!-- BARRA LATERAL - FILTRO POR PRIORIDAD -->
         <aside class="sidebar">
             <h3>⭐ Filtrar por Prioridad</h3>
             <div class="filtro-prioridad">
-                <button class="prioridad-btn activo" data-prioridad="todas">
-                    📋 Todas
-                </button>
-                <button class="prioridad-btn" data-prioridad="alta">
-                    🔴 Alta
-                </button>
-                <button class="prioridad-btn" data-prioridad="media">
-                    🟡 Media
-                </button>
-                <button class="prioridad-btn" data-prioridad="baja">
-                    🟢 Baja
-                </button>
+                <button class="prioridad-btn activo" data-prioridad="todas">📋 Todas</button>
+                <button class="prioridad-btn" data-prioridad="alta">🔴 Alta</button>
+                <button class="prioridad-btn" data-prioridad="media">🟡 Media</button>
+                <button class="prioridad-btn" data-prioridad="baja">🟢 Baja</button>
             </div>
         </aside>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="contenido-principal">
             <h1>📝 Mis Tareas</h1>
             
+            <!-- MEJORA 1: MENSAJE DE BIENVENIDA CON FECHA -->
+            <div id="bienvenida" class="bienvenida"></div>
+            
             <button id="btnModoOscuro" class="btn-modo">🌙 Modo Oscuro</button>
 
+            <!-- FORMULARIO PARA AGREGAR TAREAS -->
             <div class="formulario">
-                <h2>Agregar nueva tarea</h2>
+                <h2>➕ Agregar nueva tarea</h2>
                 <form id="formTarea">
                     <div class="campo-prioridad">
                         <label>⭐ Prioridad de la tarea:</label>
@@ -43,28 +41,61 @@
                         </select>
                     </div>
                     
-                    <input type="text" id="nombreTarea" placeholder="¿Qué tienes que hacer?" maxlength="50" required>
+                    <!-- MEJORA 2: CONTADOR DE CARACTERES -->
+                    <div class="campo-nombre">
+                        <input type="text" id="nombreTarea" placeholder="¿Qué tienes que hacer?" maxlength="50" autocomplete="off">
+                        <small id="contadorCaracteres" class="contador">0/50 caracteres</small>
+                    </div>
                     
                     <button type="submit">➕ Agregar tarea</button>
                 </form>
                 <div id="errorMsg" class="error"></div>
             </div>
 
+            <!-- FILTROS DE ESTADO Y BOTONES DE ACCIÓN -->
             <div class="filtros-estado">
                 <span class="filtro-label">📌 Estado:</span>
                 <button class="estado-btn activo" data-filtro="todas">Todas</button>
                 <button class="estado-btn" data-filtro="pendiente">Pendientes</button>
                 <button class="estado-btn" data-filtro="completada">Completadas</button>
+                
+                <button id="btnCompletarTodas" class="btn-accion">✅ Completar todas</button>
+                <button id="btnEliminarCompletadas" class="btn-accion peligro">🗑️ Eliminar completadas</button>
+                
+                <!-- MEJORA 3: BOTÓN BORRAR TODO -->
+                <button id="btnBorrarTodo" class="btn-accion peligro">⚠️ Borrar Todo</button>
             </div>
 
+            <!-- ESTADÍSTICAS EN TIEMPO REAL -->
             <div class="estadisticas">
                 <p>📊 Total: <span id="total">0</span></p>
                 <p>✅ Completadas: <span id="completadas">0</span></p>
                 <p>⏳ Pendientes: <span id="pendientes">0</span></p>
+                <p>🔴 Altas: <span id="altasCount">0</span></p>
+                <p>🟡 Medias: <span id="mediasCount">0</span></p>
+                <p>🟢 Bajas: <span id="bajasCount">0</span></p>
             </div>
 
+            <!-- LISTA DE TAREAS (SE LLENA CON JAVASCRIPT) -->
             <div id="listaTareas" class="lista-tareas">
-                <p class="mensaje-vacio">No hay tareas. ¡Agrega una!</p>
+                <p class="mensaje-vacio">📭 No hay tareas. ¡Agrega una!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA EDITAR TAREA -->
+    <div id="modalEditar" class="modal">
+        <div class="modal-content">
+            <h3>✏️ Editar Tarea</h3>
+            <input type="text" id="editNombre" placeholder="Nombre de la tarea" maxlength="50">
+            <select id="editPrioridad">
+                <option value="alta">🔴 ALTA - Urgente</option>
+                <option value="media" selected>🟡 MEDIA - Normal</option>
+                <option value="baja">🟢 BAJA - Baja prioridad</option>
+            </select>
+            <div class="modal-buttons">
+                <button class="btn-guardar" id="btnGuardarEdit">💾 Guardar</button>
+                <button class="btn-cancelar" id="btnCancelarEdit">❌ Cancelar</button>
             </div>
         </div>
     </div>
