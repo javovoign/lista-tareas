@@ -1,0 +1,362 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e0e0e0;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+/* Modo oscuro */
+body.oscuro {
+    background: #1a1a2e;
+    color: white;
+}
+
+body.oscuro .contenedor-principal {
+    background: #16213e;
+}
+
+body.oscuro .sidebar {
+    background: #0f3460;
+    border-right-color: #1a1a2e;
+}
+
+body.oscuro .formulario,
+body.oscuro .estadisticas {
+    background: #1a1a2e;
+}
+
+body.oscuro .tarea {
+    background: #0f3460;
+}
+
+body.oscuro .prioridad-btn {
+    background: #1a1a2e;
+    color: white;
+}
+
+body.oscuro .prioridad-btn:hover {
+    background: #16213e;
+}
+
+body.oscuro .prioridad-btn.activo {
+    background: #667eea;
+}
+
+/* CONTENEDOR PRINCIPAL CON SIDEBAR */
+.contenedor-principal {
+    display: flex;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* ========== SIDEBAR (COSTADO) ========== */
+.sidebar {
+    width: 180px;
+    background: #f5f5f5;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #667eea;
+}
+
+.filtro-prioridad {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prioridad-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: white;
+    transition: all 0.3s;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.prioridad-btn:hover {
+    transform: translateX(5px);
+}
+
+.prioridad-btn.activo {
+    background: #667eea;
+    color: white;
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.contenido-principal {
+    flex: 1;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.btn-modo {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 8px 16px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Formulario */
+.formulario {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.campo-prioridad {
+    margin-bottom: 15px;
+}
+
+.campo-prioridad label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+select {
+    background: white;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+}
+
+button {
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* Filtros de estado */
+.filtros-estado {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.filtro-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.estado-btn {
+    background: #ddd;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.estado-btn.activo {
+    background: #667eea;
+    color: white;
+}
+
+body.oscuro .estado-btn {
+    background: #0f3460;
+    color: white;
+}
+
+/* Estadísticas */
+.estadisticas {
+    display: flex;
+    justify-content: space-around;
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Lista de tareas */
+.lista-tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tarea {
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+    border-left: 5px solid #ccc;
+}
+
+/* Bordes de prioridad */
+.tarea[data-prioridad="alta"] {
+    border-left: 5px solid #e74c3c;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
+}
+
+.tarea[data-prioridad="media"] {
+    border-left: 5px solid #f39c12;
+}
+
+.tarea[data-prioridad="baja"] {
+    border-left: 5px solid #27ae60;
+}
+
+.tarea.completada {
+    opacity: 0.7;
+}
+
+/* Banner de prioridad */
+.prioridad-banner {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.prioridad-banner.prioridad-alta {
+    background: #e74c3c;
+    color: white;
+}
+
+.prioridad-banner.prioridad-media {
+    background: #f39c12;
+    color: white;
+}
+
+.prioridad-banner.prioridad-baja {
+    background: #27ae60;
+    color: white;
+}
+
+/* Contenido de la tarea */
+.contenido-tarea {
+    padding: 12px;
+}
+
+.nombre-tarea {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.acciones button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.acciones button:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+.btn-completar { 
+    color: #27ae60; 
+    background: rgba(39, 174, 96, 0.1) !important;
+}
+
+.btn-eliminar { 
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1) !important;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 700px) {
+    .contenedor-principal {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ddd;
+    }
+    
+    .filtro-prioridad {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .prioridad-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
