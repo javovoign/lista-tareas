@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Lista de Tareas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <h3>⭐ Filtrar por Prioridad</h3>
+            <div class="filtro-prioridad">
+                <button class="prioridad-btn activo" data-prioridad="todas">
+                    📋 Todas
+                </button>
+                <button class="prioridad-btn" data-prioridad="alta">
+                    🔴 Alta
+                </button>
+                <button class="prioridad-btn" data-prioridad="media">
+                    🟡 Media
+                </button>
+                <button class="prioridad-btn" data-prioridad="baja">
+                    🟢 Baja
+                </button>
+            </div>
+        </aside>
+
+        <div class="contenido-principal">
+            <h1>📝 Mis Tareas</h1>
+            
+            <button id="btnModoOscuro" class="btn-modo">🌙 Modo Oscuro</button>
+
+            <div class="formulario">
+                <h2>Agregar nueva tarea</h2>
+                <form id="formTarea">
+                    <div class="campo-prioridad">
+                        <label>⭐ Prioridad de la tarea:</label>
+                        <select id="prioridadTarea">
+                            <option value="alta">🔴 ALTA - Urgente e importante</option>
+                            <option value="media" selected>🟡 MEDIA - Importante pero no urgente</option>
+                            <option value="baja">🟢 BAJA - Puede esperar</option>
+                        </select>
+                    </div>
+                    
+                    <input type="text" id="nombreTarea" placeholder="¿Qué tienes que hacer?" maxlength="50" required>
+                    
+                    <button type="submit">➕ Agregar tarea</button>
+                </form>
+                <div id="errorMsg" class="error"></div>
+            </div>
+
+            <div class="filtros-estado">
+                <span class="filtro-label">📌 Estado:</span>
+                <button class="estado-btn activo" data-filtro="todas">Todas</button>
+                <button class="estado-btn" data-filtro="pendiente">Pendientes</button>
+                <button class="estado-btn" data-filtro="completada">Completadas</button>
+            </div>
+
+            <div class="estadisticas">
+                <p>📊 Total: <span id="total">0</span></p>
+                <p>✅ Completadas: <span id="completadas">0</span></p>
+                <p>⏳ Pendientes: <span id="pendientes">0</span></p>
+            </div>
+
+            <div id="listaTareas" class="lista-tareas">
+                <p class="mensaje-vacio">No hay tareas. ¡Agrega una!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
